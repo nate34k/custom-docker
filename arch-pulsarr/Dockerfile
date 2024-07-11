@@ -10,8 +10,8 @@ RUN pacman -Syu --noconfirm && \
 USER kasm-user
 
 # Install yay & AUR pkgs
-RUN git clone https://aur.archlinux.org/yay.git /tmp/yay && \
-  cd /tmp/yay && \
+RUN git clone https://aur.archlinux.org/yay.git ~/yay && \
+  cd ~/yay && \
   makepkg -si --noconfirm && \
   yay -S --noconfirm brave-bin
 
@@ -22,7 +22,7 @@ USER root
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
   source $HOME/.cargo/env && \
   pacman -S --noconfirm neovim && \
-  rm -rf /var/cache/pacman/pkg* /tmp/* \
+  rm -rf /var/cache/pacman/pkg* /home/kasm-user/yay \
 
 # Fix kasm-user terminal error
 RUN echo 'if [ -z "$SHELL" ]; then export SHELL=/bin/bash; fi' >> /home/kasm-user/.bashrc && \
