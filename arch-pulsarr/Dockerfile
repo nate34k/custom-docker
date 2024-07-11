@@ -4,22 +4,12 @@ ENV TITLE="Arch Pulsarr"
 
 # Install yay deps
 RUN pacman -Syu --noconfirm && \
-  pacman -S --needed --noconfirm base-devel git
-
-# Switch to kasm-user
-USER kasm-user
-
-# Install yay & AUR pkgs
-RUN git clone https://aur.archlinux.org/yay.git ~/yay && \
+  pacman -S --needed --noconfirm base-devel git && \
+  sudo -u kasm-user git clone https://aur.archlinux.org/yay.git ~/yay && \
   cd ~/yay && \
-  makepkg -si --noconfirm && \
-  yay -S --noconfirm brave-bin
-
-# Switch to root
-USER root
-
-# Install Rustup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+  sudo -u kasm-user makepkg -si --noconfirm && \
+  sudo yay -S --noconfirm brave-bin && \
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
   source $HOME/.cargo/env && \
   pacman -S --noconfirm neovim && \
   rm -rf /var/cache/pacman/pkg* /home/kasm-user/yay \
