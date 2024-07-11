@@ -7,8 +7,8 @@ RUN pacman -Syu --noconfirm && \
   pacman -S --needed --noconfirm base-devel git && \
   git clone https://aur.archlinux.org/yay.git /tmp/yay && \
   cd /tmp/yay && \
-  makepkg -si --noconfirm && \
-  yay -S --noconfirm brave-bin && \
+  sudo -u kasm-user makepkg -si --noconfirm && \
+  sudo -u kasm-user yay -S --noconfirm brave-bin && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
   source $HOME/.cargo/env && \
   pacman -S --noconfirm neovim && \
