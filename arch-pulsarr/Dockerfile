@@ -6,13 +6,14 @@ ENV TITLE="Arch Pulsarr"
 RUN pacman -Syu --noconfirm && \
   pacman -S --needed --noconfirm base-devel git && \
   sudo -u kasm-user git clone https://aur.archlinux.org/yay.git ~/yay && \
+  sudo -u kasm-user mkdir -p ~/.cache/go-build && \
   cd ~/yay && \
-  sudo -u kasm-user makepkg -si --noconfirm && \
+  sudo -u kasm-user GOCACHE=/home/kasm-user makepkg -si --noconfirm && \
   sudo yay -S --noconfirm brave-bin && \
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
   source $HOME/.cargo/env && \
   pacman -S --noconfirm neovim && \
-  rm -rf /var/cache/pacman/pkg* /home/kasm-user/yay \
+  rm -rf /var/cache/pacman/pkg* /home/kasm-user/yay /home/kasm-user/.cache/go-build \
 
 # Fix kasm-user terminal error
 RUN echo 'if [ -z "$SHELL" ]; then export SHELL=/bin/bash; fi' >> /home/kasm-user/.bashrc && \
