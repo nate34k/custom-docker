@@ -20,4 +20,4 @@ RUN pacman -Syu --noconfirm && \
 # Switch to kasm-user
 USER kasm-user
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
