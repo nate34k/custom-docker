@@ -4,7 +4,7 @@ ENV TITLE="Arch Pulsarr"
 
 # Install yay
 RUN pacman -Syu --noconfirm && \
-  pacman -S --needed -noconfirm base-devel git && \
+  pacman -S --needed --noconfirm base-devel git && \
   git clone https://aur.archlinux.org/yay.git /tmp/yay && \
   cd /tmp/yay && \
   makepkg -si --noconfirm && \
