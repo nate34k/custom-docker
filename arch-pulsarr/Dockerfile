@@ -17,7 +17,8 @@ RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm curl neovim && \
     rm -rf /var/cache/pacman/pkg/* /tmp/*
 
-# Switch to kasm-user
-USER kasm-user
-
+# Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Add Cargo's bin directory to PATH
+ENV PATH="/root/.cargo/bin:${PATH}"
