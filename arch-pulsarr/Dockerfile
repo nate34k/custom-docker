@@ -8,7 +8,7 @@ RUN useradd -m tempuser
 
 # Install yay and brave-bin, install rust and neovim, and fix the terminal error
 RUN pacman -Syu --noconfirm && \
-    pacman -S --needed --noconfirm base-devel git sudo && \
+    pacman -S --needed --noconfirm base-devel git sudo npm unzip && \
     echo "tempuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/tempuser && \
     sudo -u tempuser bash -c 'mkdir -p /home/tempuser/.cache/go-build && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && GOCACHE=/home/tempuser/.cache/go-build makepkg -si --noconfirm' && \
     sudo -u tempuser bash -c 'yay -S --noconfirm brave-bin' && \
